@@ -51,6 +51,14 @@
             this.lstFita = new System.Windows.Forms.ListBox();
             this.btnCE = new System.Windows.Forms.Button();
             this.btnLimpaFita = new System.Windows.Forms.Button();
+            this.tkbDigitos = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pnlSeletorDigitos = new System.Windows.Forms.Panel();
+            this.lblDigito0 = new System.Windows.Forms.Label();
+            this.lblDigitoF = new System.Windows.Forms.Label();
+            this.lblDigito2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.tkbDigitos)).BeginInit();
+            this.pnlSeletorDigitos.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSomar
@@ -244,6 +252,7 @@
             // 
             this.txtVisor.Font = new System.Drawing.Font("Cambria", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtVisor.Location = new System.Drawing.Point(12, 12);
+            this.txtVisor.MaxLength = 27;
             this.txtVisor.Name = "txtVisor";
             this.txtVisor.ReadOnly = true;
             this.txtVisor.Size = new System.Drawing.Size(308, 30);
@@ -304,11 +313,75 @@
             this.btnLimpaFita.UseVisualStyleBackColor = true;
             this.btnLimpaFita.Click += new System.EventHandler(this.btnLimpaFita_Click);
             // 
+            // tkbDigitos
+            // 
+            this.tkbDigitos.LargeChange = 1;
+            this.tkbDigitos.Location = new System.Drawing.Point(3, 3);
+            this.tkbDigitos.Maximum = 2;
+            this.tkbDigitos.Name = "tkbDigitos";
+            this.tkbDigitos.Size = new System.Drawing.Size(100, 45);
+            this.tkbDigitos.SmallChange = 0;
+            this.tkbDigitos.TabIndex = 23;
+            this.tkbDigitos.Value = 1;
+            this.tkbDigitos.Scroll += new System.EventHandler(this.tkbDigitos_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(571, 58);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 24;
+            this.label1.Text = "label1";
+            // 
+            // pnlSeletorDigitos
+            // 
+            this.pnlSeletorDigitos.Controls.Add(this.lblDigitoF);
+            this.pnlSeletorDigitos.Controls.Add(this.lblDigito0);
+            this.pnlSeletorDigitos.Controls.Add(this.lblDigito2);
+            this.pnlSeletorDigitos.Controls.Add(this.tkbDigitos);
+            this.pnlSeletorDigitos.Location = new System.Drawing.Point(137, 197);
+            this.pnlSeletorDigitos.Name = "pnlSeletorDigitos";
+            this.pnlSeletorDigitos.Size = new System.Drawing.Size(106, 42);
+            this.pnlSeletorDigitos.TabIndex = 25;
+            // 
+            // lblDigito0
+            // 
+            this.lblDigito0.AutoSize = true;
+            this.lblDigito0.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDigito0.Location = new System.Drawing.Point(10, 30);
+            this.lblDigito0.Name = "lblDigito0";
+            this.lblDigito0.Size = new System.Drawing.Size(13, 13);
+            this.lblDigito0.TabIndex = 26;
+            this.lblDigito0.Text = "0";
+            // 
+            // lblDigitoF
+            // 
+            this.lblDigitoF.AutoSize = true;
+            this.lblDigitoF.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDigitoF.Location = new System.Drawing.Point(85, 30);
+            this.lblDigitoF.Name = "lblDigitoF";
+            this.lblDigitoF.Size = new System.Drawing.Size(12, 13);
+            this.lblDigitoF.TabIndex = 27;
+            this.lblDigitoF.Text = "F";
+            // 
+            // lblDigito2
+            // 
+            this.lblDigito2.AutoSize = true;
+            this.lblDigito2.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDigito2.Location = new System.Drawing.Point(47, 30);
+            this.lblDigito2.Name = "lblDigito2";
+            this.lblDigito2.Size = new System.Drawing.Size(13, 13);
+            this.lblDigito2.TabIndex = 28;
+            this.lblDigito2.Text = "2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 281);
+            this.Controls.Add(this.pnlSeletorDigitos);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnLimpaFita);
             this.Controls.Add(this.btnCE);
             this.Controls.Add(this.lstFita);
@@ -334,6 +407,10 @@
             this.Controls.Add(this.btnSomar);
             this.Name = "Form1";
             this.Text = "Calculadora";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.tkbDigitos)).EndInit();
+            this.pnlSeletorDigitos.ResumeLayout(false);
+            this.pnlSeletorDigitos.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -364,6 +441,12 @@
         private System.Windows.Forms.ListBox lstFita;
         private System.Windows.Forms.Button btnCE;
         private System.Windows.Forms.Button btnLimpaFita;
+        private System.Windows.Forms.TrackBar tkbDigitos;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel pnlSeletorDigitos;
+        private System.Windows.Forms.Label lblDigito0;
+        private System.Windows.Forms.Label lblDigitoF;
+        private System.Windows.Forms.Label lblDigito2;
     }
 }
 

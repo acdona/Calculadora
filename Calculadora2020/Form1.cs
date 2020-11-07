@@ -19,9 +19,12 @@ namespace Calculadora2020
         private string UltimaEntrada;
         private string ValorCorrente;
         private string Operador;
+        private string SeletorDecimais; //0 = 0; 1 = 2 ; F= Vários
+        private string FormataSaida;
         private bool LimpaTexto;
         private bool EPrimeiroValor;
         private bool ValorDecimalPresente;
+
 
         //Método Calcular()
         private void Calcular()
@@ -70,7 +73,19 @@ namespace Calculadora2020
             ValorDecimalPresente = false;
             UltimaEntrada = "CLEAR";
             lstFita.Items.Add("C " + "---------------- ");
-            lstFita.Items.Add("C " + " 0.00");
+            if (tkbDigitos.Value == 0)
+            {
+                lstFita.Items.Add("C " + " 0");
+            }
+            else if (tkbDigitos.Value == 1)
+            {
+                lstFita.Items.Add("C " + " 0.00");
+            }
+            else
+            {
+                lstFita.Items.Add("C " + " 0.00000000");
+            }
+
         }
 
         private void MostraNumero()
@@ -99,6 +114,7 @@ namespace Calculadora2020
             Limpar();
             lstFita.Items.Clear();
             lstFita.Items.Add("----------------");
+            //SeletorDecimais = "2";
 
         }
 
@@ -111,35 +127,43 @@ namespace Calculadora2020
         //Clique nos botões de números 0 a 9
         private void btnNumero(object sender, EventArgs e)
         {
-            if (UltimaEntrada == "IGUAL")
-            {
-                LimpaTexto = true;
-                EPrimeiroValor = true;
-                ValorDecimalPresente = false;
-            }
 
-            if (UltimaEntrada == "VIRGULA")
+
+            if (txtVisor.TextLength != 25)
             {
-                txtVisor.Text += (sender as Button).Text;
-            }
-            else
-            {
-                if (LimpaTexto)
+
+                if (UltimaEntrada == "IGUAL")
                 {
-                    txtVisor.Text = "";
-
+                    LimpaTexto = true;
+                    EPrimeiroValor = true;
+                    ValorDecimalPresente = false;
                 }
-                if (txtVisor.Text != "0")
+
+                if (UltimaEntrada == "VIRGULA")
                 {
                     txtVisor.Text += (sender as Button).Text;
                 }
                 else
                 {
-                    txtVisor.Text = (sender as Button).Text;
+                    if (LimpaTexto)
+                    {
+                        txtVisor.Text = "";
+
+                    }
+                    if (txtVisor.Text != "0")
+                    {
+                        txtVisor.Text += (sender as Button).Text;
+                    }
+                    else
+                    {
+                        txtVisor.Text = (sender as Button).Text;
+                    }
                 }
+                MostraNumero();
+                UltimaEntrada = "NUMERO";
             }
-            MostraNumero();
-            UltimaEntrada = "NUMERO";
+
+
         }
 
         //clique no botão dos operadores
@@ -151,7 +175,8 @@ namespace Calculadora2020
                 Operador = (sender as Button).Text;
                 PrimeiroValor = ValorCorrente;
                 //iniciando impressão em fita
-                lstFita.Items.Add(ValorCorrente + Operador);
+                FormataSaida = (double.Parse(ValorCorrente).ToString("F" + SeletorDecimais.ToString()));
+                lstFita.Items.Add(FormataSaida + Operador);
                 lstFita.SetSelected(lstFita.Items.Count - 1, true);
                 lstFita.SetSelected(lstFita.Items.Count - 1, false);
             }
@@ -162,8 +187,9 @@ namespace Calculadora2020
                     return;
                 }
                 //segundo comando
-
-                lstFita.Items.Add(ValorCorrente + Operador);
+                FormataSaida = (double.Parse(ValorCorrente).ToString("F" + SeletorDecimais.ToString()));
+                lstFita.Items.Add(FormataSaida + Operador);
+                //lstFita.Items.Add(ValorCorrente + Operador);
                 lstFita.SetSelected(lstFita.Items.Count - 1, true);
                 lstFita.SetSelected(lstFita.Items.Count - 1, false);
                 Calcular();
@@ -185,7 +211,9 @@ namespace Calculadora2020
             }
             if (!EPrimeiroValor)
             {
-                lstFita.Items.Add(txtVisor.Text);
+                //lstFita.Items.Add(txtVisor.Text);
+                FormataSaida = (double.Parse(txtVisor.Text).ToString("F" + SeletorDecimais.ToString()));
+                lstFita.Items.Add(FormataSaida + Operador);
                 lstFita.SetSelected(lstFita.Items.Count - 1, true);
                 lstFita.SetSelected(lstFita.Items.Count - 1, false);
             }
@@ -199,38 +227,52 @@ namespace Calculadora2020
                 return;
             }
             Calcular();
-            
-            lstFita.Items.Add(txtVisor.Text);
-            lstFita.SetSelected(lstFita.Items.Count - 1, true);
-            lstFita.SetSelected(lstFita.Items.Count - 1, false);
-
+            try
+            {
+                FormataSaida = (double.Parse(txtVisor.Text).ToString("F" + SeletorDecimais.ToString()));
+                lstFita.Items.Add(FormataSaida + Operador);
+                //lstFita.Items.Add(txtVisor.Text);
+                lstFita.SetSelected(lstFita.Items.Count - 1, true);
+                lstFita.SetSelected(lstFita.Items.Count - 1, false);
+            }
+            catch (Exception ex)
+            {
+                txtVisor.Text= "***ERRO Divisão por zero***";
+            }
+            finally
+            {
+                LimpaTexto = false;
+            }
             UltimaEntrada = "IGUAL";
         }
         //clique no botão ponto 
         private void btnPonto_Click(object sender, EventArgs e)
         {
-            if (ValorDecimalPresente)
-            { return; }
 
-            if (UltimaEntrada == "OPERACAO" || UltimaEntrada == "IGUAL")
+            if (txtVisor.TextLength != 25)
             {
-                txtVisor.Text = "0,";
-                UltimaEntrada = "VIRGULA";
-                ValorDecimalPresente = true;
-            }
-            if (txtVisor.Text == "0" && !(ValorDecimalPresente))
-            {
-                txtVisor.Text = "0,";
-                UltimaEntrada = "VIRGULA";
-                ValorDecimalPresente = true;
-            }
-            else if (!(ValorDecimalPresente))
-            {
-                txtVisor.Text += ",";
-                ValorDecimalPresente = true;
-                UltimaEntrada = "VIRGULA";
-            }
+                if (ValorDecimalPresente)
+                { return; }
 
+                if (UltimaEntrada == "OPERACAO" || UltimaEntrada == "IGUAL")
+                {
+                    txtVisor.Text = "0,";
+                    UltimaEntrada = "VIRGULA";
+                    ValorDecimalPresente = true;
+                }
+                if (txtVisor.Text == "0" && !(ValorDecimalPresente))
+                {
+                    txtVisor.Text = "0,";
+                    UltimaEntrada = "VIRGULA";
+                    ValorDecimalPresente = true;
+                }
+                else if (!(ValorDecimalPresente))
+                {
+                    txtVisor.Text += ",";
+                    ValorDecimalPresente = true;
+                    UltimaEntrada = "VIRGULA";
+                }
+            }
 
         }
         //clique botão Back Space
@@ -277,6 +319,27 @@ namespace Calculadora2020
         private void btnLimpaFita_Click(object sender, EventArgs e)
         {
             lstFita.Items.Clear();
+        }
+
+
+        //seletor de dígitos
+        private void tkbDigitos_Scroll(object sender, EventArgs e)
+        {
+
+            if (tkbDigitos.Value == 0)
+            {
+                SeletorDecimais = "0";
+            }
+            else if (tkbDigitos.Value == 1)
+            {
+                SeletorDecimais = "2";
+            }
+            else { SeletorDecimais = "8"; }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
