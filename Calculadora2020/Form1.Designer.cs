@@ -48,6 +48,9 @@
             this.txtVisor = new System.Windows.Forms.TextBox();
             this.btnResto = new System.Windows.Forms.Button();
             this.btnBS = new System.Windows.Forms.Button();
+            this.lstFita = new System.Windows.Forms.ListBox();
+            this.btnCE = new System.Windows.Forms.Button();
+            this.btnLimpaFita = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSomar
@@ -55,7 +58,7 @@
             this.btnSomar.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSomar.Location = new System.Drawing.Point(180, 135);
             this.btnSomar.Name = "btnSomar";
-            this.btnSomar.Size = new System.Drawing.Size(65, 25);
+            this.btnSomar.Size = new System.Drawing.Size(63, 25);
             this.btnSomar.TabIndex = 0;
             this.btnSomar.Text = "+";
             this.btnSomar.UseVisualStyleBackColor = true;
@@ -66,7 +69,7 @@
             this.btnMultiplicar.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMultiplicar.Location = new System.Drawing.Point(180, 48);
             this.btnMultiplicar.Name = "btnMultiplicar";
-            this.btnMultiplicar.Size = new System.Drawing.Size(65, 25);
+            this.btnMultiplicar.Size = new System.Drawing.Size(63, 25);
             this.btnMultiplicar.TabIndex = 1;
             this.btnMultiplicar.Text = "*";
             this.btnMultiplicar.UseVisualStyleBackColor = true;
@@ -77,7 +80,7 @@
             this.btnDividir.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDividir.Location = new System.Drawing.Point(180, 106);
             this.btnDividir.Name = "btnDividir";
-            this.btnDividir.Size = new System.Drawing.Size(65, 25);
+            this.btnDividir.Size = new System.Drawing.Size(63, 25);
             this.btnDividir.TabIndex = 2;
             this.btnDividir.Text = "/";
             this.btnDividir.UseVisualStyleBackColor = true;
@@ -88,7 +91,7 @@
             this.btnSubtrair.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubtrair.Location = new System.Drawing.Point(180, 79);
             this.btnSubtrair.Name = "btnSubtrair";
-            this.btnSubtrair.Size = new System.Drawing.Size(65, 25);
+            this.btnSubtrair.Size = new System.Drawing.Size(63, 25);
             this.btnSubtrair.TabIndex = 3;
             this.btnSubtrair.Text = "-";
             this.btnSubtrair.UseVisualStyleBackColor = true;
@@ -245,13 +248,14 @@
             this.txtVisor.ReadOnly = true;
             this.txtVisor.Size = new System.Drawing.Size(308, 30);
             this.txtVisor.TabIndex = 17;
+            this.txtVisor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btnResto
             // 
             this.btnResto.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnResto.Location = new System.Drawing.Point(180, 164);
             this.btnResto.Name = "btnResto";
-            this.btnResto.Size = new System.Drawing.Size(65, 25);
+            this.btnResto.Size = new System.Drawing.Size(63, 25);
             this.btnResto.TabIndex = 18;
             this.btnResto.Text = "%";
             this.btnResto.UseVisualStyleBackColor = true;
@@ -267,11 +271,47 @@
             this.btnBS.UseVisualStyleBackColor = true;
             this.btnBS.Click += new System.EventHandler(this.btnBS_Click);
             // 
+            // lstFita
+            // 
+            this.lstFita.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lstFita.FormatString = "N2";
+            this.lstFita.FormattingEnabled = true;
+            this.lstFita.ItemHeight = 16;
+            this.lstFita.Location = new System.Drawing.Point(373, 11);
+            this.lstFita.Name = "lstFita";
+            this.lstFita.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lstFita.Size = new System.Drawing.Size(141, 244);
+            this.lstFita.TabIndex = 20;
+            // 
+            // btnCE
+            // 
+            this.btnCE.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCE.Location = new System.Drawing.Point(249, 48);
+            this.btnCE.Name = "btnCE";
+            this.btnCE.Size = new System.Drawing.Size(63, 25);
+            this.btnCE.TabIndex = 21;
+            this.btnCE.Text = "CE";
+            this.btnCE.UseVisualStyleBackColor = true;
+            this.btnCE.Click += new System.EventHandler(this.btnCE_Click);
+            // 
+            // btnLimpaFita
+            // 
+            this.btnLimpaFita.Location = new System.Drawing.Point(20, 219);
+            this.btnLimpaFita.Name = "btnLimpaFita";
+            this.btnLimpaFita.Size = new System.Drawing.Size(97, 28);
+            this.btnLimpaFita.TabIndex = 22;
+            this.btnLimpaFita.Text = "Limpa Fita";
+            this.btnLimpaFita.UseVisualStyleBackColor = true;
+            this.btnLimpaFita.Click += new System.EventHandler(this.btnLimpaFita_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(332, 196);
+            this.ClientSize = new System.Drawing.Size(706, 281);
+            this.Controls.Add(this.btnLimpaFita);
+            this.Controls.Add(this.btnCE);
+            this.Controls.Add(this.lstFita);
             this.Controls.Add(this.btnBS);
             this.Controls.Add(this.btnResto);
             this.Controls.Add(this.txtVisor);
@@ -321,6 +361,9 @@
         private System.Windows.Forms.TextBox txtVisor;
         private System.Windows.Forms.Button btnResto;
         private System.Windows.Forms.Button btnBS;
+        private System.Windows.Forms.ListBox lstFita;
+        private System.Windows.Forms.Button btnCE;
+        private System.Windows.Forms.Button btnLimpaFita;
     }
 }
 

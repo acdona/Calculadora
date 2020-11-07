@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -68,6 +69,8 @@ namespace Calculadora2020
             txtVisor.Text = "0";
             ValorDecimalPresente = false;
             UltimaEntrada = "CLEAR";
+            lstFita.Items.Add("C " + "---------------- ");
+            lstFita.Items.Add("C " + " 0.00");
         }
 
         private void MostraNumero()
@@ -94,14 +97,18 @@ namespace Calculadora2020
         {
             InitializeComponent();
             Limpar();
+            lstFita.Items.Clear();
+            lstFita.Items.Add("----------------");
 
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
         {
             Limpar();
+
         }
 
+        //Clique nos botões de números 0 a 9
         private void btnNumero(object sender, EventArgs e)
         {
             if (UltimaEntrada == "IGUAL")
@@ -135,6 +142,7 @@ namespace Calculadora2020
             UltimaEntrada = "NUMERO";
         }
 
+        //clique no botão dos operadores
         private void btnOperador(object sender, EventArgs e)
         {
             UltimaEntrada = "OPERACAO";
@@ -142,6 +150,10 @@ namespace Calculadora2020
             {
                 Operador = (sender as Button).Text;
                 PrimeiroValor = ValorCorrente;
+                //iniciando impressão em fita
+                lstFita.Items.Add(ValorCorrente + Operador);
+                lstFita.SetSelected(lstFita.Items.Count - 1, true);
+                lstFita.SetSelected(lstFita.Items.Count - 1, false);
             }
             else
             {
@@ -149,6 +161,11 @@ namespace Calculadora2020
                 {
                     return;
                 }
+                //segundo comando
+
+                lstFita.Items.Add(ValorCorrente + Operador);
+                lstFita.SetSelected(lstFita.Items.Count - 1, true);
+                lstFita.SetSelected(lstFita.Items.Count - 1, false);
                 Calcular();
                 Operador = (sender as Button).Text;
             }
@@ -158,6 +175,8 @@ namespace Calculadora2020
 
         }
 
+
+        //clique no botão igual
         private void btnIgual_Click(object sender, EventArgs e)
         {
             if (UltimaEntrada == "IGUAL")
@@ -166,7 +185,9 @@ namespace Calculadora2020
             }
             if (!EPrimeiroValor)
             {
-
+                lstFita.Items.Add(txtVisor.Text);
+                lstFita.SetSelected(lstFita.Items.Count - 1, true);
+                lstFita.SetSelected(lstFita.Items.Count - 1, false);
             }
             if (LimpaTexto)
             {
@@ -178,9 +199,14 @@ namespace Calculadora2020
                 return;
             }
             Calcular();
+            
+            lstFita.Items.Add(txtVisor.Text);
+            lstFita.SetSelected(lstFita.Items.Count - 1, true);
+            lstFita.SetSelected(lstFita.Items.Count - 1, false);
 
+            UltimaEntrada = "IGUAL";
         }
-
+        //clique no botão ponto 
         private void btnPonto_Click(object sender, EventArgs e)
         {
             if (ValorDecimalPresente)
@@ -207,7 +233,7 @@ namespace Calculadora2020
 
 
         }
-
+        //clique botão Back Space
         private void btnBS_Click(object sender, EventArgs e)
         {
             if (UltimaEntrada == "OPERACAO" || UltimaEntrada == "IGUAL")
@@ -236,6 +262,21 @@ namespace Calculadora2020
             }
 
 
+        }
+
+        //Clique botão CE
+        private void btnCE_Click(object sender, EventArgs e)
+        {
+            ValorCorrente = "0";
+            EPrimeiroValor = true;
+            txtVisor.Text = "0";
+            ValorDecimalPresente = false;
+            UltimaEntrada = "CE";
+        }
+
+        private void btnLimpaFita_Click(object sender, EventArgs e)
+        {
+            lstFita.Items.Clear();
         }
     }
 }
