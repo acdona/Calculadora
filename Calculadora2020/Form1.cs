@@ -15,6 +15,7 @@ namespace Calculadora2020
     public partial class Form1 : Form
     {
         //Variáveis
+        private string CasasDecimais;
         private string PrimeiroValor;
         private string UltimaEntrada;
         private string ValorCorrente;
@@ -94,6 +95,7 @@ namespace Calculadora2020
             try
             {
                 ValorCorrente = txtVisor.Text;
+                
             }
             catch (Exception ex)
             {
@@ -114,8 +116,8 @@ namespace Calculadora2020
             Limpar();
             lstFita.Items.Clear();
             lstFita.Items.Add("----------------");
-            //SeletorDecimais = "2";
-
+            SeletorDecimais = "2";
+            CasasDecimais = SeletorDecimais;
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
@@ -137,11 +139,16 @@ namespace Calculadora2020
                     LimpaTexto = true;
                     EPrimeiroValor = true;
                     ValorDecimalPresente = false;
+                    
+
                 }
 
                 if (UltimaEntrada == "VIRGULA")
                 {
-                    txtVisor.Text += (sender as Button).Text;
+                   //se  o tamanho dos digitos for maior que CasasDecimais pular
+                   //implementar
+                        txtVisor.Text += (sender as Button).Text;
+                    
                 }
                 else
                 {
@@ -176,9 +183,18 @@ namespace Calculadora2020
                 PrimeiroValor = ValorCorrente;
                 //iniciando impressão em fita
                 FormataSaida = (double.Parse(ValorCorrente).ToString("F" + SeletorDecimais.ToString()));
-                lstFita.Items.Add(FormataSaida + Operador);
+                //MessageBox.Show(lstFita.RightToLeft.ToString());
+                //lstFita.RightToLeft = (RightToLeft)1;
+                lstFita.Items.Add(Operador + " " + FormataSaida);
                 lstFita.SetSelected(lstFita.Items.Count - 1, true);
                 lstFita.SetSelected(lstFita.Items.Count - 1, false);
+                //lstFita.RightToLeft = (RightToLeft)1;
+
+                //lstFita.Items.Add(Operador);
+                //lstFita.SetSelected(lstFita.Items.Count - 1, true);
+                //lstFita.SetSelected(lstFita.Items.Count - 1, false);
+
+                
             }
             else
             {
@@ -188,7 +204,7 @@ namespace Calculadora2020
                 }
                 //segundo comando
                 FormataSaida = (double.Parse(ValorCorrente).ToString("F" + SeletorDecimais.ToString()));
-                lstFita.Items.Add(FormataSaida + Operador);
+                lstFita.Items.Add(Operador + " " + FormataSaida);
                 //lstFita.Items.Add(ValorCorrente + Operador);
                 lstFita.SetSelected(lstFita.Items.Count - 1, true);
                 lstFita.SetSelected(lstFita.Items.Count - 1, false);
@@ -213,7 +229,7 @@ namespace Calculadora2020
             {
                 //lstFita.Items.Add(txtVisor.Text);
                 FormataSaida = (double.Parse(txtVisor.Text).ToString("F" + SeletorDecimais.ToString()));
-                lstFita.Items.Add(FormataSaida + Operador);
+                lstFita.Items.Add(Operador + " " + FormataSaida);
                 lstFita.SetSelected(lstFita.Items.Count - 1, true);
                 lstFita.SetSelected(lstFita.Items.Count - 1, false);
             }
@@ -230,12 +246,12 @@ namespace Calculadora2020
             try
             {
                 FormataSaida = (double.Parse(txtVisor.Text).ToString("F" + SeletorDecimais.ToString()));
-                lstFita.Items.Add(FormataSaida + Operador);
+                lstFita.Items.Add(Operador + " " + FormataSaida);
                 //lstFita.Items.Add(txtVisor.Text);
                 lstFita.SetSelected(lstFita.Items.Count - 1, true);
                 lstFita.SetSelected(lstFita.Items.Count - 1, false);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 txtVisor.Text= "***ERRO Divisão por zero***";
             }
