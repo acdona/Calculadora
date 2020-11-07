@@ -14,56 +14,87 @@ namespace Calculadora2020
     public partial class Form1 : Form
     {
         //Variáveis
-        decimal Total;
-        decimal UltimoNumero;
-        string Operador;
+        private string PrimeiroValor;
+        private string UltimaEntrada;
+        private string ValorCorrente;
+        private string Operador;
+        private bool LimpaTexto;
+        private bool EPrimeiroValor;
+        private bool ValorDecimalPresente;
 
-
-        //Método Limpar
-        private void Limpar()
-        {
-            Total = 0;
-            UltimoNumero = 0;
-            Operador = "+";
-            txtVisor.Text = "0";
-
-        }
-
-        //Método Calcular
+        //Método Calcular()
         private void Calcular()
         {
+            string NumeroSaida = "";
             switch (Operador)
             {
                 case "+":
 
-                    Total += UltimoNumero;
+                    NumeroSaida = (Convert.ToDouble(PrimeiroValor) + Convert.ToDouble(ValorCorrente)).ToString();
                     break;
 
                 case "-":
-                    Total -= UltimoNumero;
+                    NumeroSaida = (Convert.ToDouble(PrimeiroValor) - Convert.ToDouble(ValorCorrente)).ToString();
                     break;
 
                 case "/":
-                    Total /= UltimoNumero;
+                    if (ValorCorrente == "0")
+                    {
+                        txtVisor.Text = "***Não pode dividir por zero***";
+                        return;
+                    }
+                    NumeroSaida = (Convert.ToDouble(PrimeiroValor) / Convert.ToDouble(ValorCorrente)).ToString();
                     break;
 
                 case "*":
-                    Total *= UltimoNumero;
+                    NumeroSaida = (Convert.ToDouble(PrimeiroValor) * Convert.ToDouble(ValorCorrente)).ToString();
                     break;
-                case "%":
-                    Total %= UltimoNumero;
-                    break;
+
             }
 
-            UltimoNumero = 0;
-            txtVisor.Text = Total.ToString();
+            Operador = "=";
+            EPrimeiroValor = true;
+            txtVisor.Text = NumeroSaida;
+            PrimeiroValor = NumeroSaida;
+            ValorCorrente = NumeroSaida;
+        }
+
+        //Limpar
+        private void Limpar()
+        {
+            PrimeiroValor = "0";
+            ValorCorrente = "0";
+            EPrimeiroValor = true;
+            txtVisor.Text = "0";
+            ValorDecimalPresente = false;
+            UltimaEntrada = "CLEAR";
+        }
+
+        private void MostraNumero()
+        {
+
+            try
+            {
+                ValorCorrente = txtVisor.Text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                LimpaTexto = false;
+            }
+
 
         }
+
 
         public Form1()
         {
             InitializeComponent();
             Limpar();
+
         }
 
         private void btnLimpar_Click(object sender, EventArgs e)
@@ -73,50 +104,137 @@ namespace Calculadora2020
 
         private void btnNumero(object sender, EventArgs e)
         {
-            if (UltimoNumero == 0 && txtVisor.Text != "0," && txtVisor.Text != "0,0")
+            if (UltimaEntrada == "IGUAL")
             {
-                txtVisor.Text = (sender as Button).Text;
+                LimpaTexto = true;
+                EPrimeiroValor = true;
+                ValorDecimalPresente = false;
+            }
+
+            if (UltimaEntrada == "VIRGULA")
+            {
+                txtVisor.Text += (sender as Button).Text;
             }
             else
             {
+                if (LimpaTexto)
+                {
+                    txtVisor.Text = "";
 
-                txtVisor.Text += (sender as Button).Text;
+                }
+                if (txtVisor.Text != "0")
+                {
+                    txtVisor.Text += (sender as Button).Text;
+                }
+                else
+                {
+                    txtVisor.Text = (sender as Button).Text;
+                }
             }
-
-            UltimoNumero = Convert.ToDecimal(txtVisor.Text);
-
-
+            MostraNumero();
+            UltimaEntrada = "NUMERO";
         }
 
         private void btnOperador(object sender, EventArgs e)
         {
-            UltimoNumero = Convert.ToDecimal(txtVisor.Text);
-            Calcular();
-            Operador = (sender as Button).Text;
+            UltimaEntrada = "OPERACAO";
+            if (EPrimeiroValor)
+            {
+                Operador = (sender as Button).Text;
+                PrimeiroValor = ValorCorrente;
+            }
+            else
+            {
+                if (LimpaTexto)
+                {
+                    return;
+                }
+                Calcular();
+                Operador = (sender as Button).Text;
+            }
+            EPrimeiroValor = false;
+            LimpaTexto = true;
+            ValorDecimalPresente = false;
+
         }
 
         private void btnIgual_Click(object sender, EventArgs e)
         {
-            UltimoNumero = Convert.ToDecimal(txtVisor.Text);
+            if (UltimaEntrada == "IGUAL")
+            {
+                Limpar();
+            }
+            if (!EPrimeiroValor)
+            {
+
+            }
+            if (LimpaTexto)
+            {
+                return;
+            }
+            if (Operador == "=")
+            {
+                UltimaEntrada = "IGUAL";
+                return;
+            }
             Calcular();
-            Operador = "+";
-            Total = 0;
+
         }
 
         private void btnPonto_Click(object sender, EventArgs e)
         {
-           
-            if (txtVisor.Text == "0" || UltimoNumero != 0.0M)
-            {
-                txtVisor.Text += ",";
+            if (ValorDecimalPresente)
+            { return; }
 
-            }
-            else
+            if (UltimaEntrada == "OPERACAO" || UltimaEntrada == "IGUAL")
             {
                 txtVisor.Text = "0,";
+                UltimaEntrada = "VIRGULA";
+                ValorDecimalPresente = true;
             }
-           
-            UltimoNumero = Convert.ToDecimal(txtVisor.Text);
+            if (txtVisor.Text == "0" && !(ValorDecimalPresente))
+            {
+                txtVisor.Text = "0,";
+                UltimaEntrada = "VIRGULA";
+                ValorDecimalPresente = true;
+            }
+            else if (!(ValorDecimalPresente))
+            {
+                txtVisor.Text += ",";
+                ValorDecimalPresente = true;
+                UltimaEntrada = "VIRGULA";
+            }
+
+
+        }
+
+        private void btnBS_Click(object sender, EventArgs e)
+        {
+            if (UltimaEntrada == "OPERACAO" || UltimaEntrada == "IGUAL")
+            {
+                txtVisor.Text = "0";
+                UltimaEntrada = "NUMERO";
+
+            }
+            if (txtVisor.TextLength == 1)
+            {
+                txtVisor.Text = "0";
+                ValorDecimalPresente = false;
+
+            }
+            else if (txtVisor.TextLength > 0)
+            {
+                txtVisor.Text = txtVisor.Text.Remove(txtVisor.TextLength - 1, 1);
+                if (txtVisor.Text.IndexOf(",") == -1)
+                {
+                    ValorDecimalPresente = false;
+                }
+                else if (txtVisor.Text == "0")
+                {
+                    ValorDecimalPresente = false;
+                }
+            }
+
 
         }
     }

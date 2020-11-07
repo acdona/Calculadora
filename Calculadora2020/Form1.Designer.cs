@@ -47,6 +47,7 @@
             this.btnIgual = new System.Windows.Forms.Button();
             this.txtVisor = new System.Windows.Forms.TextBox();
             this.btnResto = new System.Windows.Forms.Button();
+            this.btnBS = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnSomar
@@ -242,7 +243,7 @@
             this.txtVisor.Location = new System.Drawing.Point(12, 12);
             this.txtVisor.Name = "txtVisor";
             this.txtVisor.ReadOnly = true;
-            this.txtVisor.Size = new System.Drawing.Size(233, 30);
+            this.txtVisor.Size = new System.Drawing.Size(308, 30);
             this.txtVisor.TabIndex = 17;
             // 
             // btnResto
@@ -256,11 +257,22 @@
             this.btnResto.UseVisualStyleBackColor = true;
             this.btnResto.Click += new System.EventHandler(this.btnOperador);
             // 
+            // btnBS
+            // 
+            this.btnBS.Location = new System.Drawing.Point(60, 51);
+            this.btnBS.Name = "btnBS";
+            this.btnBS.Size = new System.Drawing.Size(57, 21);
+            this.btnBS.TabIndex = 19;
+            this.btnBS.Text = "<--";
+            this.btnBS.UseVisualStyleBackColor = true;
+            this.btnBS.Click += new System.EventHandler(this.btnBS_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 196);
+            this.ClientSize = new System.Drawing.Size(332, 196);
+            this.Controls.Add(this.btnBS);
             this.Controls.Add(this.btnResto);
             this.Controls.Add(this.txtVisor);
             this.Controls.Add(this.btnIgual);
@@ -308,6 +320,7 @@
         private System.Windows.Forms.Button btnIgual;
         private System.Windows.Forms.TextBox txtVisor;
         private System.Windows.Forms.Button btnResto;
+        private System.Windows.Forms.Button btnBS;
     }
 }
 
