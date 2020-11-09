@@ -47,6 +47,12 @@ namespace Calculadora2020
                     NumeroSaida = (Convert.ToDouble(PrimeiroValor) * Convert.ToDouble(ValorCorrente)).ToString();
                     break;
 
+                case "%":
+                    NumeroSaida = (Convert.ToDouble(PrimeiroValor) % Convert.ToDouble(ValorCorrente)).ToString();
+                    break;
+
+
+
             }
             PrimeiroValor = NumeroSaida;
             ValorCorrente = NumeroSaida;
@@ -321,23 +327,21 @@ namespace Calculadora2020
             }
             catch (Exception)
             {
-                try
-                {
-                    string NomeBotao = e.KeyChar.ToString();
-                    if (NomeBotao == "+") { NomeBotao = "Somar"; }
-                    if (NomeBotao == "-") { NomeBotao = "Subtrair"; }
-                    if (NomeBotao == "*") { NomeBotao = "Multiplicar"; }
-                    if (NomeBotao == "/") { NomeBotao = "Dividir"; }
-                    if (NomeBotao == "." || NomeBotao == ",") { NomeBotao = "Ponto"; }
-                    int Tecla = e.KeyChar.GetHashCode();
-                    if (Tecla == 851981) { NomeBotao = "Igual"; }
-                    if (Tecla == 524296) { NomeBotao = "BS"; }
-                    if (Tecla == 1769499) { NomeBotao = "CE"; }
-                    Button btn = this.Controls.OfType<Button>().ToList().FirstOrDefault(b => b.Name == "btn" + NomeBotao);
-                    btn.PerformClick();
-                    e.Handled = true;
-                }
-                catch { }
+                string NomeBotao = e.KeyChar.ToString();
+                if (NomeBotao == "+") { NomeBotao = "Somar"; }
+                if (NomeBotao == "-") { NomeBotao = "Subtrair"; }
+                if (NomeBotao == "*") { NomeBotao = "Multiplicar"; }
+                if (NomeBotao == "/") { NomeBotao = "Dividir"; }
+                if (NomeBotao == "." || NomeBotao == ",") { NomeBotao = "Ponto"; }
+                if(NomeBotao =="c" || NomeBotao =="C") { NomeBotao = "Limpar"; }
+                int Tecla = e.KeyChar.GetHashCode();
+                if (Tecla == 851981) { NomeBotao = "Igual"; }
+                if (Tecla == 524296) { NomeBotao = "BS"; }
+                if (Tecla == 1769499) { NomeBotao = "CE"; }
+                Button btn = this.Controls.OfType<Button>().ToList().FirstOrDefault(b => b.Name == "btn" + NomeBotao);
+                if (btn == null) { return; }
+                btn.PerformClick();
+                e.Handled = true;
             }
         }
 

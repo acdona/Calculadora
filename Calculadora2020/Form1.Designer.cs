@@ -282,14 +282,15 @@
             // 
             // lstFita
             // 
+            this.lstFita.BackColor = System.Drawing.SystemColors.Info;
             this.lstFita.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lstFita.FormatString = "N2";
             this.lstFita.FormattingEnabled = true;
             this.lstFita.ItemHeight = 16;
-            this.lstFita.Location = new System.Drawing.Point(373, 11);
+            this.lstFita.Location = new System.Drawing.Point(342, 11);
             this.lstFita.Name = "lstFita";
             this.lstFita.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lstFita.Size = new System.Drawing.Size(141, 244);
+            this.lstFita.Size = new System.Drawing.Size(201, 244);
             this.lstFita.TabIndex = 20;
             // 
             // btnCE
