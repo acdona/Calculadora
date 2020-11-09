@@ -54,8 +54,8 @@
             this.tkbDigitos = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlSeletorDigitos = new System.Windows.Forms.Panel();
-            this.lblDigito0 = new System.Windows.Forms.Label();
             this.lblDigitoF = new System.Windows.Forms.Label();
+            this.lblDigito0 = new System.Windows.Forms.Label();
             this.lblDigito2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tkbDigitos)).BeginInit();
             this.pnlSeletorDigitos.SuspendLayout();
@@ -345,16 +345,6 @@
             this.pnlSeletorDigitos.Size = new System.Drawing.Size(106, 42);
             this.pnlSeletorDigitos.TabIndex = 25;
             // 
-            // lblDigito0
-            // 
-            this.lblDigito0.AutoSize = true;
-            this.lblDigito0.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDigito0.Location = new System.Drawing.Point(10, 30);
-            this.lblDigito0.Name = "lblDigito0";
-            this.lblDigito0.Size = new System.Drawing.Size(13, 13);
-            this.lblDigito0.TabIndex = 26;
-            this.lblDigito0.Text = "0";
-            // 
             // lblDigitoF
             // 
             this.lblDigitoF.AutoSize = true;
@@ -364,6 +354,16 @@
             this.lblDigitoF.Size = new System.Drawing.Size(12, 13);
             this.lblDigitoF.TabIndex = 27;
             this.lblDigitoF.Text = "F";
+            // 
+            // lblDigito0
+            // 
+            this.lblDigito0.AutoSize = true;
+            this.lblDigito0.Font = new System.Drawing.Font("Calibri", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDigito0.Location = new System.Drawing.Point(10, 30);
+            this.lblDigito0.Name = "lblDigito0";
+            this.lblDigito0.Size = new System.Drawing.Size(13, 13);
+            this.lblDigito0.TabIndex = 26;
+            this.lblDigito0.Text = "0";
             // 
             // lblDigito2
             // 
@@ -407,7 +407,8 @@
             this.Controls.Add(this.btnSomar);
             this.Name = "Form1";
             this.Text = "Calculadora";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.tkbDigitos)).EndInit();
             this.pnlSeletorDigitos.ResumeLayout(false);
             this.pnlSeletorDigitos.PerformLayout();
