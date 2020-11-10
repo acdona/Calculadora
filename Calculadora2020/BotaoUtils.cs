@@ -12,5 +12,17 @@ namespace Calculadora2020
         {
             return value.All(char.IsNumber);
         }
+        public static string GetFuncao(string funcao)
+        {
+            string NomeBotao = funcao.ToString();
+            if (NomeBotao == "+") { NomeBotao = "Somar"; }
+            if (NomeBotao == "-") { NomeBotao = "Subtrair"; }
+            if (NomeBotao == "*") { NomeBotao = "Multiplicar"; }
+            if (NomeBotao == "/") { NomeBotao = "Dividir"; }
+            if (NomeBotao == "." || NomeBotao == ",") { NomeBotao = "Ponto"; }
+            if (NomeBotao == "c" || NomeBotao == "C") { NomeBotao = "Limpar"; }
+            if (NomeBotao == "=") { NomeBotao = "Igual"; }
+            return NomeBotao;
+        }
     }
 }

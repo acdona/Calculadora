@@ -193,19 +193,9 @@ namespace Calculadora2020
         //clique no botão igual
         private void btnIgual_Click(object sender, EventArgs e)
         {
-            if (UltimaEntrada == "IGUAL")
-            {
-                Limpar();
-            }
-            if (!EPrimeiroValor)
-            {
-                ImprimimeFita();
-            }
-
-            if (LimpaTexto)
-            {
-                return;
-            }
+            if (UltimaEntrada == "IGUAL") { Limpar(); }
+            if (!EPrimeiroValor) { ImprimimeFita(); }
+            if (LimpaTexto) { return; }
             if (Operador == "=")
             {
                 UltimaEntrada = "IGUAL";
@@ -218,7 +208,7 @@ namespace Calculadora2020
             }
             catch (Exception)
             {
-                txtVisor.Text = "";//"""***ERRO Divisão por zero***";
+                txtVisor.Text = "0";//"""***ERRO Divisão por zero***";
             }
             finally
             {
@@ -268,7 +258,6 @@ namespace Calculadora2020
             {
                 txtVisor.Text = "0";
                 ValorDecimalPresente = false;
-
             }
             else if (txtVisor.TextLength > 0)
             {
@@ -303,34 +292,19 @@ namespace Calculadora2020
         //escolha no seletor de dígitos
         private void tkbDigitos_Scroll(object sender, EventArgs e)
         {
-            if (tkbDigitos.Value == 0)
-            {
-                SeletorDecimais = "0";
-            }
-            else if (tkbDigitos.Value == 1)
-            {
-                SeletorDecimais = "2";
-            }
+            if (tkbDigitos.Value == 0) { SeletorDecimais = "0"; }
+            else if (tkbDigitos.Value == 1) { SeletorDecimais = "2"; }
             else { SeletorDecimais = "8"; }
         }
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            string NomeBotao = e.KeyChar.ToString();
             try
             {
+                string NomeBotao = e.KeyChar.ToString();
                 if (!BotaoUtils.IsNumeric(NomeBotao))
                 {
-                    if (NomeBotao == "+") { NomeBotao = "Somar"; }
-                    if (NomeBotao == "-") { NomeBotao = "Subtrair"; }
-                    if (NomeBotao == "*") { NomeBotao = "Multiplicar"; }
-                    if (NomeBotao == "/") { NomeBotao = "Dividir"; }
-                    if (NomeBotao == "." || NomeBotao == ",") { NomeBotao = "Ponto"; }
-                    if (NomeBotao == "c" || NomeBotao == "C") { NomeBotao = "Limpar"; }
-                    int Tecla = e.KeyChar.GetHashCode();
-                    if (Tecla == 851981) { NomeBotao = "Igual"; }
-                    if (Tecla == 524296) { NomeBotao = "BS"; }
-                    if (Tecla == 1769499) { NomeBotao = "CE"; }
+                    NomeBotao = BotaoUtils.GetFuncao(NomeBotao);
                 }
                 Button btn = this.Controls.OfType<Button>().ToList().FirstOrDefault(b => b.Name == "btn" + NomeBotao);
                 if (btn == null) { return; }
@@ -345,11 +319,14 @@ namespace Calculadora2020
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
-            {
-                btnLimpar.PerformClick();
-                e.Handled = true;
-            }
+            string NomeBotao = null;
+            if (e.KeyCode == Keys.Delete) { NomeBotao = "btnLimpar"; }
+            if (e.KeyCode == Keys.Back) { NomeBotao = "btnBS"; }
+            if (e.KeyCode == Keys.Enter) { NomeBotao = "btnIgual"; }
+            Button btn = this.Controls.OfType<Button>().ToList().FirstOrDefault(b => b.Name == NomeBotao);
+            if (btn == null) { return; }
+            btn.PerformClick();
+            e.Handled = true;
         }
 
         private void ImprimimeFita()

@@ -254,7 +254,7 @@
             this.txtVisor.MaxLength = 27;
             this.txtVisor.Name = "txtVisor";
             this.txtVisor.ReadOnly = true;
-            this.txtVisor.Size = new System.Drawing.Size(308, 30);
+            this.txtVisor.Size = new System.Drawing.Size(231, 30);
             this.txtVisor.TabIndex = 17;
             this.txtVisor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -271,9 +271,9 @@
             // 
             // btnBS
             // 
-            this.btnBS.Location = new System.Drawing.Point(60, 51);
+            this.btnBS.Location = new System.Drawing.Point(68, 48);
             this.btnBS.Name = "btnBS";
-            this.btnBS.Size = new System.Drawing.Size(57, 21);
+            this.btnBS.Size = new System.Drawing.Size(49, 24);
             this.btnBS.TabIndex = 19;
             this.btnBS.Text = "<--";
             this.btnBS.UseVisualStyleBackColor = true;
@@ -286,7 +286,7 @@
             this.lstFita.FormatString = "N2";
             this.lstFita.FormattingEnabled = true;
             this.lstFita.ItemHeight = 16;
-            this.lstFita.Location = new System.Drawing.Point(342, 11);
+            this.lstFita.Location = new System.Drawing.Point(268, 12);
             this.lstFita.Name = "lstFita";
             this.lstFita.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lstFita.Size = new System.Drawing.Size(201, 244);
@@ -295,9 +295,9 @@
             // btnCE
             // 
             this.btnCE.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCE.Location = new System.Drawing.Point(249, 48);
+            this.btnCE.Location = new System.Drawing.Point(12, 48);
             this.btnCE.Name = "btnCE";
-            this.btnCE.Size = new System.Drawing.Size(63, 25);
+            this.btnCE.Size = new System.Drawing.Size(50, 25);
             this.btnCE.TabIndex = 21;
             this.btnCE.Text = "CE";
             this.btnCE.UseVisualStyleBackColor = true;
@@ -305,9 +305,9 @@
             // 
             // btnLimpaFita
             // 
-            this.btnLimpaFita.Location = new System.Drawing.Point(20, 219);
+            this.btnLimpaFita.Location = new System.Drawing.Point(12, 200);
             this.btnLimpaFita.Name = "btnLimpaFita";
-            this.btnLimpaFita.Size = new System.Drawing.Size(97, 28);
+            this.btnLimpaFita.Size = new System.Drawing.Size(105, 47);
             this.btnLimpaFita.TabIndex = 22;
             this.btnLimpaFita.Text = "Limpa Fita";
             this.btnLimpaFita.UseVisualStyleBackColor = true;
@@ -333,7 +333,7 @@
             this.pnlSeletorDigitos.Controls.Add(this.tkbDigitos);
             this.pnlSeletorDigitos.Location = new System.Drawing.Point(137, 197);
             this.pnlSeletorDigitos.Name = "pnlSeletorDigitos";
-            this.pnlSeletorDigitos.Size = new System.Drawing.Size(106, 42);
+            this.pnlSeletorDigitos.Size = new System.Drawing.Size(106, 46);
             this.pnlSeletorDigitos.TabIndex = 25;
             // 
             // lblDigitoF
@@ -370,7 +370,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 281);
+            this.ClientSize = new System.Drawing.Size(487, 271);
             this.Controls.Add(this.pnlSeletorDigitos);
             this.Controls.Add(this.btnLimpaFita);
             this.Controls.Add(this.btnCE);
