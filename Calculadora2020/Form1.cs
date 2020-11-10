@@ -316,44 +316,40 @@ namespace Calculadora2020
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
+            string NomeBotao = e.KeyChar.ToString();
             try
             {
-                if (Convert.ToDouble(e.KeyChar.ToString()) >= 0 && Convert.ToDouble(e.KeyChar.ToString()) <= 9)
+                if (!BotaoUtils.IsNumeric(NomeBotao))
                 {
-                    Button btn = this.Controls.OfType<Button>().ToList().FirstOrDefault(b => b.Name == "btn" + e.KeyChar.ToString());
-                    btn.PerformClick();
-                    e.Handled = true;
+                    if (NomeBotao == "+") { NomeBotao = "Somar"; }
+                    if (NomeBotao == "-") { NomeBotao = "Subtrair"; }
+                    if (NomeBotao == "*") { NomeBotao = "Multiplicar"; }
+                    if (NomeBotao == "/") { NomeBotao = "Dividir"; }
+                    if (NomeBotao == "." || NomeBotao == ",") { NomeBotao = "Ponto"; }
+                    if (NomeBotao == "c" || NomeBotao == "C") { NomeBotao = "Limpar"; }
+                    int Tecla = e.KeyChar.GetHashCode();
+                    if (Tecla == 851981) { NomeBotao = "Igual"; }
+                    if (Tecla == 524296) { NomeBotao = "BS"; }
+                    if (Tecla == 1769499) { NomeBotao = "CE"; }
                 }
-            }
-            catch (Exception)
-            {
-                string NomeBotao = e.KeyChar.ToString();
-                if (NomeBotao == "+") { NomeBotao = "Somar"; }
-                if (NomeBotao == "-") { NomeBotao = "Subtrair"; }
-                if (NomeBotao == "*") { NomeBotao = "Multiplicar"; }
-                if (NomeBotao == "/") { NomeBotao = "Dividir"; }
-                if (NomeBotao == "." || NomeBotao == ",") { NomeBotao = "Ponto"; }
-                if(NomeBotao =="c" || NomeBotao =="C") { NomeBotao = "Limpar"; }
-                int Tecla = e.KeyChar.GetHashCode();
-                if (Tecla == 851981) { NomeBotao = "Igual"; }
-                if (Tecla == 524296) { NomeBotao = "BS"; }
-                if (Tecla == 1769499) { NomeBotao = "CE"; }
                 Button btn = this.Controls.OfType<Button>().ToList().FirstOrDefault(b => b.Name == "btn" + NomeBotao);
                 if (btn == null) { return; }
                 btn.PerformClick();
                 e.Handled = true;
             }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            label1.Text = Convert.ToString(e.KeyValue);
             if (e.KeyCode == Keys.Delete)
             {
                 btnLimpar.PerformClick();
                 e.Handled = true;
             }
-
         }
 
         private void ImprimimeFita()

@@ -52,7 +52,6 @@
             this.btnCE = new System.Windows.Forms.Button();
             this.btnLimpaFita = new System.Windows.Forms.Button();
             this.tkbDigitos = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlSeletorDigitos = new System.Windows.Forms.Panel();
             this.lblDigitoF = new System.Windows.Forms.Label();
             this.lblDigito0 = new System.Windows.Forms.Label();
@@ -326,15 +325,6 @@
             this.tkbDigitos.Value = 1;
             this.tkbDigitos.Scroll += new System.EventHandler(this.tkbDigitos_Scroll);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(571, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 24;
-            this.label1.Text = "label1";
-            // 
             // pnlSeletorDigitos
             // 
             this.pnlSeletorDigitos.Controls.Add(this.lblDigitoF);
@@ -380,9 +370,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 281);
+            this.ClientSize = new System.Drawing.Size(552, 281);
             this.Controls.Add(this.pnlSeletorDigitos);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnLimpaFita);
             this.Controls.Add(this.btnCE);
             this.Controls.Add(this.lstFita);
@@ -444,7 +433,6 @@
         private System.Windows.Forms.Button btnCE;
         private System.Windows.Forms.Button btnLimpaFita;
         private System.Windows.Forms.TrackBar tkbDigitos;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlSeletorDigitos;
         private System.Windows.Forms.Label lblDigito0;
         private System.Windows.Forms.Label lblDigitoF;
